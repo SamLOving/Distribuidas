@@ -49,7 +49,7 @@ public class servidor {
                     }
                     //out.println(input.toUpperCase());
                     out.println("mensaje enviado");
-                    log(input);
+                    log("Mensaje del cliente #" + numeroCliente + ":"+input);
                 }
             } catch (IOException e) {
                 log("Error handling client# " + numeroCliente + ": " + e);
