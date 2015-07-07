@@ -19,8 +19,11 @@ public class cliente {
     private PrintWriter out;
     private JFrame frame = new JFrame("Cliente");
     private JTextField dataField = new JTextField(40);
-    private JTextArea messageArea = new JTextArea(8, 60);
+    private JTextArea messageArea = new JTextArea(8, 40);
 
+    /**
+     * Crea la interfaz por la que se comunicará el cliente
+     */
     public cliente() {
 
         messageArea.setEditable(false);
@@ -30,39 +33,45 @@ public class cliente {
         dataField.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                out.println(dataField.getText());
-                   String response;
-                try {
-                    response = in.readLine();
-                    if (response == null || response.equals("")) {
-                          System.exit(0);
-                      }
-                } catch (IOException ex) {
-                       response = "Error: " + ex;
-                }
-                messageArea.append(response + "\n");
-                dataField.selectAll();
+            	out.println(dataField.getText());
+	            String response;
+	            try {
+	            	response = in.readLine();
+	                if (response == null || response.equals("0")) {
+	                	System.exit(0);
+	                }
+	            } catch (IOException ex) {
+	                response = "Error: " + ex;
+	            }
+	            messageArea.append(response + "\n");
+	            dataField.selectAll();
             }
         });
     }
 
-
+    /**
+     * Conecta al cliente con el servidor mediante el puerto y la IP
+     */
     public void connectToServer() throws IOException {
-
-        String serverAddress = JOptionPane.showInputDialog(
-            frame,
-            "Ingrese la direccion IP del servidor:",
-            "Bienvenido ",
-            JOptionPane.QUESTION_MESSAGE);
-
-        Socket socket = new Socket(serverAddress, 9999);
-        in = new BufferedReader(
-                new InputStreamReader(socket.getInputStream()));
-        out = new PrintWriter(socket.getOutputStream(), true);
-
-        for (int i = 0; i < 3; i++) {
-            messageArea.append(in.readLine() + "\n");
-        }
+    	try {
+	        String serverAddress = JOptionPane.showInputDialog(
+	            frame,
+	            "Ingrese la direccion IP del servidor:",
+	            "Bienvenido ",
+	            JOptionPane.QUESTION_MESSAGE);
+	
+	        Socket socket = new Socket(serverAddress, 9999);
+	        in = new BufferedReader(
+	                new InputStreamReader(socket.getInputStream()));
+	        out = new PrintWriter(socket.getOutputStream(), true);
+	
+	        for (int i = 0; i < 3; i++) {
+	            messageArea.append(in.readLine() + "\n");
+	        }
+    	} catch (Exception e1){
+    		JOptionPane.showMessageDialog(null, "La dirección IP ingresada es incorrecta");
+    		dataField.setEnabled(false);
+    	}
     }
 
 
