@@ -7,7 +7,10 @@ import java.net.Socket;
 
 
 public class servidor {
-
+	/**
+     * Se establece un lazo infinito en el que el 
+     * servidor escuchará por el el puerto: 9002
+     */
     public static void main(String[] args) throws Exception {
         System.out.println("El servidor se encuentra ejecutandose...");
         int numeroCliente = 0;
@@ -20,7 +23,10 @@ public class servidor {
             listener.close();
         }
     }
-
+    
+    /**
+     * Asigna una thread a cada cliente.
+     */
     private static class Server extends Thread {
         private Socket socket;
         private int numeroCliente;
@@ -62,7 +68,10 @@ public class servidor {
                 log("Conexion con el cliente # " + numeroCliente + " cerrada");
             }
         }
-
+        
+        /**
+         * Envia un mensaje log al servidor
+         */
         private void log(String message) {
             System.out.println(message);
         }
