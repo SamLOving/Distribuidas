@@ -22,7 +22,7 @@ public class cliente {
     private JTextArea messageArea = new JTextArea(8, 40);
 
     /**
-     * Crea la interfaz por la que se comunicará el cliente
+     * Crea la interfaz por la que se comunicara el cliente
      */
     public cliente() {
 
@@ -58,7 +58,7 @@ public class cliente {
 	            frame,
 	            "Ingrese la direccion IP del servidor:",
 	            "Bienvenido ",
-	            JOptionPane.QUESTION_MESSAGE);
+	            JOptionPane.WARNING_MESSAGE);
 	
 	        Socket socket = new Socket(serverAddress, 9999);
 	        in = new BufferedReader(
@@ -69,7 +69,7 @@ public class cliente {
 	            messageArea.append(in.readLine() + "\n");
 	        }
     	} catch (Exception e1){
-    		JOptionPane.showMessageDialog(null, "La dirección IP ingresada es incorrecta");
+    		JOptionPane.showMessageDialog(null, "La direccion IP ingresada es incorrecta","Error",JOptionPane.ERROR_MESSAGE);
     		dataField.setEnabled(false);
     	}
     }

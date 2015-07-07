@@ -9,7 +9,7 @@ import java.net.Socket;
 public class servidor {
 	/**
      * Se establece un lazo infinito en el que el 
-     * servidor escuchará por el el puerto: 9002
+     * servidor escuchara por el el puerto: 9999
      */
     public static void main(String[] args) throws Exception {
         System.out.println("El servidor se encuentra ejecutandose...");
@@ -46,14 +46,13 @@ public class servidor {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
                 out.println("Hola, eres el cliente #" + numeroCliente + ".");
-                out.println("Ingresa como mensaje 'return 0' para salir\n");
+                out.println("Ingresa como mensaje 'salir!!!' para hacerlo\n");
 
                 while (true) {
                     String input = in.readLine();
-                    if (input == null || input.equals("return 0")) {
+                    if (input == null || input.equals("salir!!!")) {
                         break;
                     }
-                    //out.println(input.toUpperCase());
                     out.println("mensaje enviado");
                     log("Mensaje del cliente #" + numeroCliente + ":"+input);
                 }
@@ -63,7 +62,7 @@ public class servidor {
                 try {
                     socket.close();
                 } catch (IOException e) {
-                    log("No se puede cerrar el socket - Error 120147");
+                    log("No se puede cerrar el socket - Error desconocido");
                 }
                 log("Conexion con el cliente # " + numeroCliente + " cerrada");
             }
